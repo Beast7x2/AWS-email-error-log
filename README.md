@@ -8,19 +8,19 @@ mvn clean package shade:shade
 
 upload this jar to the AWS lambda function.
 
-This function can be invoked by API gateway with sampleValue in the query param
+This function can be invoked by AWS API gateway with sampleValue in the query param
 
 ```sh
 https://apiurl.com/sampleValue=1
 ```
 
-if the sampleValue is less than zero then it will log a ERROR message in CloudWatch logs.
+if the sampleValue is less than zero then it will log a ERROR message in AWS CloudWatch logs.
 
 To send email for that error. Create another lamda function and add trigger using CloudWatch by selecting the previous lamda function's log group with specific keyword filter
 for which you want to send email. In this case I have created filter for "Error" keyword.
 
 
-Please use below code for second lamda function which publishes message to a topic from where it sends the email
+Please use below code for second lamda function which publishes message to a SNS topic from where it sends the email
 
 ```sh
 const AWS = require('aws-sdk');
@@ -52,4 +52,4 @@ exports.handler = async(event) => {
 };
 
 
-The above function will publish message to "Error" topic in SNS and SNS will send email to all the subscribers of the topic.
+The above function will publish message to "Error" topic in AWS SNS and SNS will send email to all the subscribers of the topic.
