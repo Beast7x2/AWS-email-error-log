@@ -50,6 +50,6 @@ exports.handler = async(event) => {
     });
 
 };
-
+```
 
 The above function will publish message to "Error" topic in AWS SNS and SNS will send email to all the subscribers of the topic.
